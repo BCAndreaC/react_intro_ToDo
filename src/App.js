@@ -17,6 +17,7 @@ function App() {
   return (
     <>
     <ToDoNav />
+    <img src="remote.work.png" alt="reat" />
       <ToDoCounter completed={16} total={25} />
       <ToDoSearch />
 
