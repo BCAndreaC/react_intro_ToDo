@@ -5,36 +5,35 @@ import { ToDoList } from "./ToDoList";
 import { ToDoItem } from "./ToDoItem";
 import { CreateToDoButton } from "./CreateToDoButton";
 import { ToDoNav } from "./ToDoNav";
+import "./App.css";
 
 const defaultToDos = [
-  {text: 'Cortar cebolla', completed: true},
-  {text: 'Tomar curso react.js', completed: false},
-  {text: 'Llorar con la Llorona', completed: false},
-  {text: 'LALALALALA', completed: false},
+  { text: "Cortar cebolla", completed: true },
+  { text: "Tomar curso react.js", completed: false },
+  { text: "Llorar con la Llorona", completed: false },
+  { text: "LALALALALA", completed: false },
 ];
 
 function App() {
   return (
     <>
-    <ToDoNav />
-    <img src="remote.work.png" alt="reat" />
+      <ToDoNav />
       <ToDoCounter completed={16} total={25} />
-      <ToDoSearch />
-
+      <div className="App-search">
+        <ToDoSearch />
+        <CreateToDoButton />
+      </div>
       <ToDoList>
-        {defaultToDos.map(ToDo => (
-          <ToDoItem 
-          key={ToDo.text} 
-          text={ToDo.text} 
-          completed={ToDo.completed}
+        {defaultToDos.map((ToDo) => (
+          <ToDoItem
+            key={ToDo.text}
+            text={ToDo.text}
+            completed={ToDo.completed}
           />
         ))}
       </ToDoList>
-
-      <CreateToDoButton /> 
     </>
   );
 }
-
 
 export default App;

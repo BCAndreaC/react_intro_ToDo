@@ -1,0 +1,9 @@
+.App-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: calc(10px + 2vmin);
+    text-align: center;
+    flex-direction: column;
+}

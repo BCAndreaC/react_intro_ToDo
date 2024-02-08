@@ -1,10 +1,11 @@
+import React from 'react';
 import './ToDoNav.css';
 
 
 function ToDoNav (){
     return (
         <div className='nav'> 
-            <h1>Jane Wilson</h1>
+            <img src={process.env.PUBLIC_URL + '/active-young-woman-programming-on-laptop.gif'} alt="react"/>
         </div>
     )
 }
