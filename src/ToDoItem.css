@@ -1,0 +1,8 @@
+.liToDo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px;
+    padding: 0px;
+    border-bottom: 1px solid #ccc;
+}

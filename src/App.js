@@ -12,15 +12,23 @@ const defaultToDos = [
   { text: "Tomar curso react.js", completed: false },
   { text: "Llorar con la Llorona", completed: false },
   { text: "LALALALALA", completed: false },
+  { text: "Usar estados derivados", completed: true },
 ];
 
 function App() {
+  const [ToDos, setToDos] = React.useState(defaultToDos);
+  const [searchValue, setSearchValue] = React.useState("");
+  console.log("Los usuarios buscan" + searchValue);
+
+  const completedToDos = ToDos.filter((ToDo) => !!ToDo.completed).length;
+  const totalToDos = ToDos.length;
+
   return (
     <>
       <ToDoNav />
-      <ToDoCounter completed={16} total={25} />
+      <ToDoCounter completed={completedToDos} total={totalToDos} />
       <div className="App-search">
-        <ToDoSearch />
+        <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
         <CreateToDoButton />
       </div>
       <ToDoList>

@@ -1,6 +1,7 @@
+import './ToDoItem.css';
 function ToDoItem(props) {
     return (
-      <li>
+      <li className="liToDo">
         <span>V {props.completed}</span>
         <p>{props.text}</p>
         <span>X</span>

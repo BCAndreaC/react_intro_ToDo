@@ -1,8 +1,9 @@
 import './ToDoSearch.css';
 
-function ToDoSearch (){
+function ToDoSearch (searchValue, setSearchValue){
     return (
-        <input placeholder = "Cortar cebolla" />
+        <input placeholder = 'Escribe tu tarea'
+        className='ToDoSearch' />
     )
 }
 
