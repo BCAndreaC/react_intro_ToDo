@@ -1,7 +1,13 @@
 import './CreateToDoButton.css';
 function CreateToDoButton() {
   return (
-  <button>Añadir</button>
+  <button
+  className='CreateToDoButton'
+  onClick={(event) => {
+    console.log('Añadir una tarea nueva');
+  }
+}
+  >Añadir</button>
   );
 }
 
