@@ -31,7 +31,18 @@ function App() {
   }
   );
 
-  console.log('Los usuarios buscan' + searchValue)
+  const completeToDo = (text) => {
+    const newToDos = [...ToDos];
+    const toDoIndex = newToDos.findIndex(ToDo => ToDo.text === text);
+    newToDos[toDoIndex].completed = true;
+    setToDos(newToDos);
+  };
+  const onDeleteToDo = (text) => {
+    const newToDos = [...ToDos];
+    const toDoIndex = newToDos.findIndex(ToDo => ToDo.text === text);
+    newToDos.splice(toDoIndex, 1);
+    setToDos(newToDos);
+  };
 
   return (
     <>
@@ -53,6 +64,8 @@ function App() {
             key={ToDo.text}
             text={ToDo.text}
             completed={ToDo.completed}
+            onComplete={() => completeToDo(ToDo.text)}
+            onDelete={() => onDeleteToDo(ToDo.text)}
           />
         ))}
       </ToDoList>
