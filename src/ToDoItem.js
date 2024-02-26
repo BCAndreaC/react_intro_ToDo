@@ -1,4 +1,7 @@
 import './ToDoItem.css';
+import { MdCheckCircleOutline } from "react-icons/md";
+import { MdHighlightOff } from "react-icons/md";
+
 function ToDoItem(props) {
     return (
       <li className="liToDo">
@@ -6,7 +9,7 @@ function ToDoItem(props) {
         className={ `Icon Icon-check} ${props.completed && "Icon-check--active"}`}
         onClick={props.onComplete}
         >
-          V 
+          <MdCheckCircleOutline />
         </span>
         <p className={`ToDoItem-p ${props.completed && "ToDoItem-p--complete"}`}
         >
@@ -14,7 +17,8 @@ function ToDoItem(props) {
           </p>
         <span className="Icon Icon-delete" onClick={props.onDelete}
         >
-          X</span>
+          <MdHighlightOff/> 
+          </span>
       </li>
     );
   }
