@@ -6,7 +6,7 @@ function ToDoItem(props) {
     return (
       <li className="liToDo">
         <span
-        className={ `Icon Icon-check} ${props.completed && "Icon-check--active"}`}
+        className={ `Icon Icon-check ${props.completed && "Icon-check--active"}`}
         onClick={props.onComplete}
         >
           <MdCheckCircleOutline />
