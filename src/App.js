@@ -15,70 +15,67 @@ import "./App.css";
 //   { text: "Usar estados derivados", completed: true },
 // ];
 // localStorage.setItem('ToDos_V1.0', JSON.stringify(defaultToDos));
-// localStorage.removeItem('ToDos_V1.0');
+// localStorage.removeItem('ToDos_V1.0')
 
+function useLocalStorage(itemName, initialValue) {
+  
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    saveItem(newItem);
+  };
+  return [item, saveItem];
+}
 
 function App() {
-  const localStorageToDos = localStorage.getItem('ToDos_V1.0');
-  let parsedToDos = JSON.parse(localStorageToDos);
-
-  if (!localStorageToDos) {
-    localStorage.setItem('ToDos_V1.0', JSON.stringify([]));
-    parsedToDos = [];
-  } else {
-    parsedToDos = JSON.parse(localStorageToDos);
-  }
-  
-  const [ToDos, setToDos] = React.useState(parsedToDos);
-  const [searchValue, setSearchValue] = React.useState('');
+  const [ToDos, saveToDos] = useLocalStorage('ToDos_V1.0', []);
+  const [searchValue, setSearchValue] = React.useState("");
   console.log("Los usuarios buscan" + searchValue);
 
-  const completedToDos = ToDos.filter(ToDo => !!ToDo.completed).length;
+  const completedToDos = ToDos.filter((ToDo) => !!ToDo.completed).length;
   const totalToDos = ToDos.length;
 
-  const searchedToDos = ToDos.filter(
-    (ToDo) => {
-      const toDoText = ToDo.text.toLowerCase();
-      const searchText = searchValue.toLowerCase();
-     return toDoText.includes(searchText);
-  }
-  );
-
-  const saveToDos = (newToDos) => {
-    const stringifiedToDos = JSON.stringify(newToDos);
-    localStorage.setItem('ToDos_V1.0', stringifiedToDos);
-    setToDos(newToDos);
-  }
+  const searchedToDos = ToDos.filter((ToDo) => {
+    const toDoText = ToDo.text.toLowerCase();
+    const searchText = searchValue.toLowerCase();
+    return toDoText.includes(searchText);
+  });
 
   const completeToDo = (text) => {
-    const newToDos = [...ToDos];
-    const toDoIndex = newToDos.findIndex(ToDo => ToDo.text === text);
-    newToDos[toDoIndex].completed = true;
-    saveToDos(newToDos);
+    const newItems = [...ToDos];
+    const toDoIndex = newItems.findIndex((ToDo) => ToDo.text === text);
+    newItems[toDoIndex].completed = true;
+    saveToDos(newItems);
   };
   const onDeleteToDo = (text) => {
-    const newToDos = [...ToDos];
-    const toDoIndex = newToDos.findIndex(ToDo => ToDo.text === text);
-    newToDos.splice(toDoIndex, 1);
-    saveToDos(newToDos);
+    const newItems = [...ToDos];
+    const toDoIndex = newItems.findIndex((ToDo) => ToDo.text === text);
+    newItems.splice(toDoIndex, 1);
+    saveToDos(newItems);
   };
 
   return (
     <>
       <ToDoNav />
-      <ToDoCounter 
-      completed={completedToDos} 
-      total={totalToDos} 
-      />
+      <ToDoCounter completed={completedToDos} total={totalToDos} />
       <div className="App-search">
-        <ToDoSearch 
-        searchValue={searchValue} 
-        setSearchValue={setSearchValue} 
-        />
+        <ToDoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
         <CreateToDoButton />
       </div>
       <ToDoList>
-        {searchedToDos.map(ToDo => (
+        {searchedToDos.map((ToDo) => (
           <ToDoItem
             key={ToDo.text}
             text={ToDo.text}
